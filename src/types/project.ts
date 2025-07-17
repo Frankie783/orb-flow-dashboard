@@ -9,6 +9,7 @@ export interface Project {
   needsAndDependencies: string;
   nextSteps: string;
   researchFocus: string;
+  expectedDay?: Date;
   images?: string[];
   attachments?: Array<{
     name: string;
@@ -28,6 +29,7 @@ export interface ProjectFormData {
   needsAndDependencies: string;
   nextSteps: string;
   researchFocus: string;
+  expectedDay?: Date;
   images?: string[];
   attachments?: Array<{
     name: string;

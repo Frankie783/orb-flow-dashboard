@@ -1,12 +1,16 @@
 import { useState } from 'react';
+import { format } from 'date-fns';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
+import { Calendar } from '@/components/ui/calendar';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { ProjectFormData } from '@/types/project';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Plus, X, Upload } from 'lucide-react';
+import { Plus, X, Upload, CalendarIcon } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 interface ProjectFormProps {
   initialData?: Partial<ProjectFormData>;
@@ -26,6 +30,7 @@ export const ProjectForm = ({ initialData, onSave, onCancel, isEditing = false }
     needsAndDependencies: initialData?.needsAndDependencies || '',
     nextSteps: initialData?.nextSteps || '',
     researchFocus: initialData?.researchFocus || '',
+    expectedDay: initialData?.expectedDay,
     images: initialData?.images || [],
     attachments: initialData?.attachments || []
   });
@@ -136,6 +141,34 @@ export const ProjectForm = ({ initialData, onSave, onCancel, isEditing = false }
                 <span>10</span>
               </div>
             </div>
+          </div>
+
+          {/* Expected Day */}
+          <div className="space-y-2">
+            <Label className="text-sm font-medium">Expected Day</Label>
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button
+                  variant="outline"
+                  className={cn(
+                    "w-full justify-start text-left font-normal",
+                    !formData.expectedDay && "text-muted-foreground"
+                  )}
+                >
+                  <CalendarIcon className="mr-2 h-4 w-4" />
+                  {formData.expectedDay ? format(formData.expectedDay, "PPP") : <span>Pick a date</span>}
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-auto p-0" align="start">
+                <Calendar
+                  mode="single"
+                  selected={formData.expectedDay}
+                  onSelect={(date) => setFormData(prev => ({ ...prev, expectedDay: date }))}
+                  initialFocus
+                  className={cn("p-3 pointer-events-auto")}
+                />
+              </PopoverContent>
+            </Popover>
           </div>
 
           {/* Text Fields */}

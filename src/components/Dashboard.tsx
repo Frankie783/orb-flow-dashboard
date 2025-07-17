@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Plus } from 'lucide-react';
 import { useProjects } from '@/hooks/useProjects';
 import { PrioritizationMatrix } from './PrioritizationMatrix';
+import { Timeline } from './Timeline';
 import { ProjectCard } from './ProjectCard';
 import { ProjectForm } from './ProjectForm';
 import { TopBar } from './TopBar';
@@ -50,6 +51,11 @@ export const Dashboard = () => {
         {/* Prioritization Matrix */}
         <div className="mb-8">
           <PrioritizationMatrix projects={projects} />
+        </div>
+
+        {/* Timeline */}
+        <div className="mb-8">
+          <Timeline projects={projects} />
         </div>
 
         {/* Projects Section */}
