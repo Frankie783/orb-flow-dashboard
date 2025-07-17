@@ -272,7 +272,12 @@ export const ProjectForm = ({ initialData, onSave, onCancel, isEditing = false }
                 placeholder="Image URL"
                 className="flex-1"
               />
-              <Button type="button" variant="outline" onClick={addImage}>
+              <Button 
+                type="button" 
+                variant="outline" 
+                onClick={addImage}
+                disabled={!newImageUrl.trim()}
+              >
                 <Plus className="w-4 h-4" />
               </Button>
             </div>
@@ -317,7 +322,13 @@ export const ProjectForm = ({ initialData, onSave, onCancel, isEditing = false }
                 placeholder="Attachment URL"
               />
             </div>
-            <Button type="button" variant="outline" onClick={addAttachment} className="w-full">
+            <Button 
+              type="button" 
+              variant="outline" 
+              onClick={addAttachment} 
+              className="w-full"
+              disabled={!newAttachmentName.trim() || !newAttachmentUrl.trim()}
+            >
               <Plus className="w-4 h-4 mr-2" />
               Add Attachment
             </Button>
